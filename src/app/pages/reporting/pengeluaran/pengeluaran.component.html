@@ -1,0 +1,126 @@
+<div class="container">
+  <!-- headbar -->
+  <div class="headbar mt-10 flex justify-between content-center">
+    <h1 class="text-2xl ms-2 mt-4 font-bold text-[#365486]">
+      DATA PENGELUARAN SUSU
+    </h1>
+  </div>
+
+  <!-- Table -->
+  <div class="card-body mt-5 shadow-md sm:rounded-lg bg-white rounded-md p-5">
+    <div class="headTable flex justify-between">
+      <div class="btn">
+        <button
+          routerLink="/add-pengeluaran"
+          type="button"
+          class="text-white ms-2 bg-[#365486] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Tambah Pengeluaran
+        </button>
+      </div>
+      <div class="btn-export">
+        <button
+          [routerLink]="['/export', 2]"
+          type="button"
+          class="text-white ms-2 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Export PDF
+        </button>
+      </div>
+    </div>
+    <div class="relative mt-2 overflow-x-auto">
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead
+          class="text-xs text-gray-700 uppercase bg-[#DCF2F1] dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-6 py-3 textwh">No</th>
+            <th scope="col" class="px-6 py-3">Tanggal Transaksi</th>
+            <th scope="col" class="px-6 py-3">No ID Customer</th>
+            <th scope="col" class="px-6 py-3">Nama Customer</th>
+            <th scope="col" class="px-6 py-3">Vol</th>
+            <th scope="col" class="px-6 py-3">Kualitas Susu</th>
+            <th scope="col" class="px-6 py-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container
+            *ngFor="let transaction of displayTransactions; let i = index"
+          >
+            <tr
+              class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+            >
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </th>
+              <td class="px-6 py-4">{{ transaction.date | date }}</td>
+              <td class="px-6 py-4">{{ transaction.noIdCustomer }}</td>
+              <td class="px-6 py-4">{{ transaction.customer_name }}</td>
+              <td class="px-6 py-4">{{ transaction.vol }}</td>
+              <td class="px-6 py-4">
+                <button
+                  (click)="toogleModalKualitas(1, transaction)"
+                  class="font-medium text-green-500 dark:text-green-500 hover:underline"
+                >
+                  Lihat
+                </button>
+              </td>
+              <td class="px-1 py-4">
+                <a
+                  (click)="toogleRemove(1, transaction)"
+                  class="ms-5 font-medium text-red-500 dark:text-red-500 hover:underline"
+                  ><i class="fa-solid fa-trash"></i
+                ></a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+
+      <!-- PAGINATION -->
+      <div class="flex justify-between mt-5 p-5">
+        <div class="info-pagination">
+          Showing {{ getStartIndex() }} - {{ getEndIndex() }} entries
+          {{ entires }}
+        </div>
+        <div class="btn-pagination flex">
+          <!-- Previous Button -->
+          <button
+            [disabled]="currentPage === 1"
+            (click)="prevPage()"
+            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Previous
+          </button>
+
+          <!-- Next Button -->
+          <button
+            [disabled]="currentPage === totalPages"
+            (click)="nextPage()"
+            class="flex items-center justify-center px-3 h-8 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-kualitas
+  id="modal-kualitas"
+  class="absolute hidden overflow-y-auto overflow-x-hidden flex w-full h-full justify-center items-center top-0 left-0 backdrop-blur-sm backdrop-brightness-75 shadow-md"
+  [dataReceived]="dataReceived"
+  (closeModalEvent)="toogleModalKualitas(0, null)"
+></app-modal-kualitas>
+<app-remove-pengeluaran
+  id="modal-penerimaan"
+  class="absolute hidden overflow-y-auto overflow-x-hidden flex w-full h-full justify-center items-center top-0 left-0 backdrop-blur-sm backdrop-brightness-75 shadow-md"
+  [dataReceived]="dataReceived"
+  (closeModalEvent)="toogleRemove(0, null)"
+></app-remove-pengeluaran>

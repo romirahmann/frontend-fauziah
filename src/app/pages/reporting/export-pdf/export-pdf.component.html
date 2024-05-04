@@ -1,0 +1,67 @@
+<div class="container">
+  <!-- headbar -->
+  <div class="headbar mt-10 flex justify-between content-center">
+    <h1 class="text-2xl ms-2 mt-4 font-bold text-[#365486]">PREVIEW EXPORT</h1>
+  </div>
+
+  <!-- Table -->
+  <div class="card-body mt-5 shadow-md sm:rounded-lg bg-white rounded-md p-5">
+    <div class="headTable flex justify-between">
+      <div class="btn">
+        <button
+          (click)="generatePDF()"
+          type="button"
+          class="text-white ms-2 bg-[#365486] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Export
+        </button>
+      </div>
+      <!-- <button
+        type="button"
+        class="text-white ms-2 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      >
+        Filter Tanggal
+      </button> -->
+    </div>
+    <div class="relative mt-2 overflow-x-auto" #templatePDF>
+      <h1 class="text-2xl text-center mb-5 ms-2 mt-4 font-bold">
+        LAPORAN {{ categoryTransaction }} SUSU
+      </h1>
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead
+          class="text-xs text-gray-700 uppercase bg-[#DCF2F1] dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-6 py-3 textwh">No</th>
+            <th scope="col" class="px-6 py-3">Tanggal Transaksi</th>
+            <th scope="col" class="px-6 py-3">No ID Anggota</th>
+            <th scope="col" class="px-6 py-3">Nama Peternak</th>
+            <th scope="col" class="px-6 py-3">Nama Kelompok</th>
+            <th scope="col" class="px-6 py-3">Vol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let transaction of transactions; let i = index">
+            <tr
+              class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+            >
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </th>
+              <td class="px-6 py-4">{{ transaction.date | date }}</td>
+              <td class="px-6 py-4">{{ transaction.noID }}</td>
+              <td class="px-6 py-4">{{ transaction.member_name }}</td>
+              <td class="px-6 py-4">{{ transaction.group_name }}</td>
+              <td class="px-6 py-4">{{ transaction.vol }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

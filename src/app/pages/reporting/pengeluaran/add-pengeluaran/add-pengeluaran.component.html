@@ -1,0 +1,248 @@
+<!--  FORM ADD TRANSACTION -->
+<div
+  id="form-add-transaction"
+  class="card-body mt-5 shadow-md sm:rounded-lg bg-white rounded-md p-5"
+>
+  <h1 class="text-2xl ms-2 mt-4 font-bold text-[#365486]">Add Transaction</h1>
+  <form
+    class="space-y-4 md:space-y-6 mt-10"
+    [formGroup]="formAddTransaction"
+    (submit)="submitAddTransaction()"
+  >
+    <div class="mt-2">
+      <label
+        for="date"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Date</label
+      >
+      <input
+        type="date"
+        formControlName="date"
+        id="date"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="customer_id"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Data Customer</label
+      >
+      <select
+        id="customer_id"
+        formControlName="customer_id"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+      >
+        <option value="null" disabled>Select Customer</option>
+        <ng-container *ngFor="let customer of dataCustomer">
+          <option value="{{ customer.customer_id }}">
+            {{ customer.customer_name }}
+          </option></ng-container
+        >
+      </select>
+    </div>
+    <div class="mt-2">
+      <label
+        for="vol"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Volume</label
+      >
+      <input
+        type="number"
+        formControlName="vol"
+        id="stok"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+
+    <button
+      [disabled]="!formAddTransaction.valid"
+      type="submit"
+      class="w-full text-white bg-blue-600 hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<!-- FORM KUALITAS SUSU -->
+<div
+  id="form-add-kualitas"
+  class="hidden card-body mt-5 shadow-md sm:rounded-lg bg-white rounded-md p-5"
+>
+  <h1 class="text-2xl ms-2 mt-4 font-bold text-[#365486]">Add Kualitas</h1>
+  <form
+    class="space-y-4 md:space-y-6 mt-10"
+    [formGroup]="formAddKualitas"
+    (submit)="submitFormKualitas()"
+  >
+    <div class="mt-2">
+      <label
+        for="uji_alkohol"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Uji Alkohol</label
+      >
+      <select
+        id="uji_alkohol"
+        formControlName="uji_alkohol"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+      >
+        <option value="null" disabled>Select Kualitas</option>
+        <option value="1">Ok</option>
+        <option value="1">Not Ok</option>
+      </select>
+    </div>
+
+    <div class="mt-2">
+      <label
+        for="uji_bj"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Uji BJ / Laksodensimeter</label
+      >
+      <input
+        type="text"
+        formControlName="uji_bj"
+        id="uji_bj"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+
+    <div class="mt-2">
+      <label
+        for="fat"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Fat</label
+      >
+      <input
+        type="text"
+        formControlName="fat"
+        id="fat"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="snf"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Solid Non Fat</label
+      >
+      <input
+        type="text"
+        formControlName="snf"
+        id="snf"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="density"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Density</label
+      >
+      <input
+        type="text"
+        formControlName="density"
+        id="density"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="lactosa"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Lactosa</label
+      >
+      <input
+        type="text"
+        formControlName="lactosa"
+        id="lactosa"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="salts"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Salts</label
+      >
+      <input
+        type="text"
+        formControlName="salts"
+        id="salts"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="protein"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Protein</label
+      >
+      <input
+        type="text"
+        formControlName="protein"
+        id="protein"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="ts"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Total Solid</label
+      >
+      <input
+        type="text"
+        formControlName="ts"
+        id="ts"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="added_water"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Added Water</label
+      >
+      <input
+        type="text"
+        formControlName="added_water"
+        id="added_water"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="temp_sample"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Temp Sample</label
+      >
+      <input
+        type="text"
+        formControlName="temp_sample"
+        id="temp_sample"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+    <div class="mt-2">
+      <label
+        for="freez_point"
+        class="form-control block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Freez Point</label
+      >
+      <input
+        type="text"
+        formControlName="freez_point"
+        id="freez_point"
+        class="form-control bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+
+    <button
+      [disabled]="!formAddKualitas.valid"
+      type="submit"
+      class="w-full text-white bg-blue-600 hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+    >
+      Submit
+    </button>
+  </form>
+</div>

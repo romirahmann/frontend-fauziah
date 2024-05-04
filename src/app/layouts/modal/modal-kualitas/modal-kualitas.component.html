@@ -1,0 +1,92 @@
+<div class="p-4 rounded-xl w-full max-w-md max-h-full bg-white">
+  <button
+    (click)="closeModal()"
+    type="button"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+  >
+    <svg
+      class="w-3 h-3"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 14 14"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+      />
+    </svg>
+    <span class="sr-only">Close modal</span>
+  </button>
+  <h1 class="text-2xl ms-2 mt-4 font-bold text-[#365486]">KUALITAS</h1>
+  <table *ngIf="dataKualitas" class="mt-5">
+    <tr>
+      <td class="font-bold px-2 py-2">Uji Alkohol</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <ng-container *ngIf="dataKualitas.uji_alkohol === 1">
+        <td class="px-2 py-2">Oke</td></ng-container
+      >
+      <ng-container *ngIf="dataKualitas.uji_alkohol === 2">
+        <td class="px-2 py-2">Not Oke</td></ng-container
+      >
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Uji Bj / Laksodensimeter</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.uji_bj }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Fat</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.fat }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Solid Non Fat</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.snf }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Density</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.density }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Lactosa</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.lactosa }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Salts</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.salts }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Protein</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.protein }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Total Solid</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.ts }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Added Water</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.added_water }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Temp Sample</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.temp_sample }}</td>
+    </tr>
+    <tr>
+      <td class="font-bold px-2 py-2">Freez Point</td>
+      <td class="font-bold px-2 py-2">:</td>
+      <td class="px-2 py-2">{{ dataKualitas.freez_point }}</td>
+    </tr>
+  </table>
+</div>

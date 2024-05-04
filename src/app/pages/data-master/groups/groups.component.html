@@ -1,0 +1,121 @@
+<div class="container">
+  <!-- headbar -->
+  <div class="headbar mt-10 flex justify-between content-center">
+    <h1 class="text-2xl ms-2 mt-4 font-bold text-[#365486]">DATA GROUPS</h1>
+    <div class="">
+      <label for="table-search" class="sr-only">Search</label>
+      <div class="relative mt-1">
+        <div
+          class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </div>
+        <input
+          type="text"
+          id="table-search"
+          class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Search group ..."
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card-body mt-5 shadow-md sm:rounded-lg bg-white rounded-md p-5">
+    <button
+      (click)="toogleModal(1, null)"
+      type="button"
+      class="text-white ms-2 bg-[#365486] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    >
+      Add Group
+    </button>
+    <div class="relative mt-2 overflow-x-auto">
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead
+          class="text-xs text-gray-700 uppercase bg-[#DCF2F1] dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-6 py-3 textwh">No</th>
+            <th scope="col" class="px-6 py-3">Group Name</th>
+
+            <th scope="col" class="px-6 py-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let group of displayGroups; let i = index">
+            <tr
+              class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+            >
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {{ (currentPage - 1) * pageSize + i + 1 }}
+              </th>
+              <td class="px-6 py-4">{{ group.group_name }}</td>
+              <td class="px-1 py-4">
+                <a
+                  (click)="toogleModal(2, group)"
+                  class="font-medium text-green-500 dark:text-green-500 hover:underline"
+                  ><i class="fa-solid fa-pen-to-square"></i
+                ></a>
+                <a
+                  (click)="toogleModal(3, group)"
+                  class="ms-5 font-medium text-red-500 dark:text-red-500 hover:underline"
+                  ><i class="fa-solid fa-trash"></i
+                ></a>
+              </td></tr
+          ></ng-container>
+        </tbody>
+      </table>
+      <div class="flex justify-between mt-5 p-5">
+        <div class="info-pagination">
+          Showing {{ getStartIndex() }} - {{ getEndIndex() }} entries
+          {{ entires }}
+        </div>
+        <div class="btn-pagination flex">
+          <!-- Previous Button -->
+          <button
+            [disabled]="currentPage === 1"
+            (click)="prevPage()"
+            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Previous
+          </button>
+
+          <!-- Next Button -->
+          <button
+            [disabled]="currentPage === totalPages"
+            (click)="nextPage()"
+            class="flex items-center justify-center px-3 h-8 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-group
+  id="modal-group"
+  class="absolute hidden overflow-y-auto overflow-x-hidden flex w-full h-full justify-center items-center top-0 left-0 backdrop-blur-sm backdrop-brightness-75 shadow-md"
+  [dataReceived]="dataReceived"
+  (closeModalEvent)="toogleModal(0, null)"
+></app-modal-group>
